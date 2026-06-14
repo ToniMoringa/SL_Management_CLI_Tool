@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Project Manager CLI - User Guide</title>
+    <link rel="icon" type="image/svg+xml" href="assets/cursor.png" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-image: url(https://00s.neocities.org/images/bliss.jpg);
+        font-family: 'Tahoma', 'Verdana', 'Arial', 'MS Sans Serif', sans-serif;
+        margin: 20px;
+        padding: 20px;
+        cursor: url('assets/cursor.cur'), auto;
+      }
+
+      /* Windows 2000 Style Window */
+      .window {
+        background: #d4d0c8;
+        border: 3px solid;
+        border-color: #ffffff #808080 #808080 #ffffff;
+        margin: auto;
+        max-width: 1100px;
+        box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Title Bar */
+      .title-bar {
+        background: #000080;
+        padding: 6px 8px;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 14px;
+        font-family: 'Tahoma', sans-serif;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      a .title-bar-text {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .window-controls {
+        display: flex;
+        gap: 2px;
+      }
+
+      .window-btn {
+        background: #d4d0c8;
+        border: 2px solid;
+        border-color: #ffffff #808080 #808080 #ffffff;
+        width: 28px;
+        height: 24px;
+        text-align: center;
+        line-height: 20px;
+        font-weight: bold;
+        font-family: 'Tahoma', monospace;
+        font-size: 14px;
+        cursor: pointer;
+        color: #000000;
+      }
+
+      .window-btn:active {
+        border-color: #808080 #ffffff #ffffff #808080;
+      }
+
+      /* Content Area */
+      .window-content {
+        padding: 16px;
+        background: #d4d0c8;
+        border: 2px solid;
+        border-color: #808080 #ffffff #ffffff #808080;
+        margin: 3px;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+
+      /* Scrollbar styling */
+      .window-content::-webkit-scrollbar {
+        width: 16px;
+        background: #d4d0c8;
+      }
+
+      .window-content::-webkit-scrollbar-thumb {
+        background: #c0c0c0;
+        border: 2px solid;
+        border-color: #ffffff #808080 #808080 #ffffff;
+      }
+
+      /* Desktop-style containers */
+      .desktop-container {
+        background: #d4d0c8;
+        padding: 10px;
+      }
+
+      h1 {
+        background: #000080;
+        color: #ffffff;
+        padding: 8px 12px;
+        font-size: 18px;
+        font-family: 'Tahoma', 'Arial', sans-serif;
+        font-weight: bold;
+        margin: 0 0 15px 0;
+        letter-spacing: 1px;
+      }
+
+      h2 {
+        background: #808080;
+        color: #ffffff;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-family: 'Tahoma', sans-serif;
+        font-weight: bold;
+        margin: 20px 0 10px 0;
+        border-left: none;
+      }
+
+      h3 {
+        background: #c0c0c0;
+        color: #000000;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-family: 'Tahoma', sans-serif;
+        font-weight: bold;
+        margin: 15px 0 8px 0;
+        border-left: 5px solid #000080;
+      }
+
+      .cmd-box {
+        background: #ffffff;
+        color: #000000;
+        padding: 12px;
+        font-family: 'Lucida Console', 'Courier New', monospace;
+        font-size: 12px;
+        border: 2px inset #808080;
+        overflow-x: auto;
+        margin: 10px 0;
+        white-space: pre-wrap;
+      }
+
+      .example {
+        background: #ffffe0;
+        padding: 10px;
+        border: 2px solid #808080;
+        margin: 15px 0;
+        font-size: 12px;
+      }
+
+      .code-block {
+        background: #ffffff;
+        padding: 10px;
+        border-left: 5px solid #000080;
+        font-family: 'Lucida Console', 'Courier New', monospace;
+        font-size: 11px;
+        overflow-x: auto;
+        margin: 10px 0;
+      }
+
+      table {
+        width: 100%;
+        background: #ffffff;
+        border-collapse: collapse;
+        font-size: 12px;
+        margin: 10px 0;
+      }
+
+      th {
+        background: #808080;
+        color: #ffffff;
+        padding: 6px 8px;
+        text-align: left;
+        border: 2px solid #d4d0c8;
+        font-weight: bold;
+      }
+
+      td {
+        padding: 6px 8px;
+        border: 1px solid #808080;
+        vertical-align: top;
+      }
+
+      .note {
+        background: #ffffcc;
+        padding: 10px;
+        border: 2px solid #808080;
+        margin: 15px 0;
+        font-size: 11px;
+      }
+
+      .success {
+        background: #c0ffc0;
+        padding: 10px;
+        border: 2px solid #008000;
+        margin: 15px 0;
+        font-size: 12px;
+      }
+
+      hr {
+        border: 2px solid #808080;
+        margin: 15px 0;
+      }
+
+      .footer {
+        text-align: center;
+        font-size: 11px;
+        margin-top: 20px;
+        padding: 10px;
+        background: #c0c0c0;
+        border: 2px inset #ffffff;
+        font-family: 'Tahoma', sans-serif;
+      }
+
+      blink {
+        animation: blinker 1s linear infinite;
+      }
+
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      marquee {
+        background: #000080;
+        color: #ffffff;
+        padding: 4px;
+        font-family: 'Tahoma', sans-serif;
+        font-size: 11px;
+      }
+
+      .badge {
+        display: inline-block;
+        background: #808080;
+        color: #ffffff;
+        padding: 2px 6px;
+        font-size: 10px;
+        margin: 2px;
+        font-family: 'Tahoma', sans-serif;
+      }
+
+      /* Video container Windows style */
+      .video-container {
+        background: #000000;
+        border: 3px inset #808080;
+        margin: 15px 0;
+        text-align: center;
+      }
+
+      video {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        display: block;
+        margin: auto;
+        background: #000000;
+      }
+
+      .video-caption {
+        background: #c0c0c0;
+        padding: 4px;
+        font-size: 11px;
+        text-align: center;
+        font-family: 'Tahoma', sans-serif;
+        border-top: 1px solid #ffffff;
+      }
+
+      .status-bar {
+        background: #c0c0c0;
+        padding: 4px 8px;
+        font-size: 11px;
+        font-family: 'Tahoma', sans-serif;
+        border-top: 2px inset #ffffff;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      button {
+        background: #d4d0c8;
+        border: 2px solid;
+        border-color: #ffffff #808080 #808080 #ffffff;
+        padding: 4px 12px;
+        font-family: 'Tahoma', sans-serif;
+        font-size: 11px;
+        cursor: pointer;
+      }
+
+      button:active {
+        border-color: #808080 #ffffff #ffffff #808080;
+      }
+
+      a {
+        color: #0000ff;
+        text-decoration: underline;
+      }
+
+      a:visited {
+        color: #800080;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="window">
+      <!-- Title Bar -->
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <span>📁</span>
+          <span>Project Manager CLI Tool - User Guide</span>
+        </div>
+        <div class="window-controls">
+          <div class="window-btn">─</div>
+          <div class="window-btn">□</div>
+          <div class="window-btn">✕</div>
+        </div>
+      </div>
+
+      <!-- Menu Bar (Classic Windows style) -->
+      <div
+        style="
+          background: #c0c0c0;
+          padding: 2px 0;
+          border-bottom: 2px inset #ffffff;
+        "
+      >
+        <span style="padding: 4px 12px; font-size: 11px">File</span>
+        <span style="padding: 4px 12px; font-size: 11px">Edit</span>
+        <span style="padding: 4px 12px; font-size: 11px">View</span>
+        <span style="padding: 4px 12px; font-size: 11px">Help</span>
+      </div>
+
+      <!-- Content Area -->
+      <div class="window-content">
+        <marquee behavior="scroll" direction="left" scrollamount="2">
+          𓍯𓂃๋ ⭑ PROJECT MANAGEMENT CLI TOOL - TEAM MANAGEMENT SYSTEM 𓍯𓂃๋ ⭑
+        </marquee>
+
+        <div class="success">
+          <strong> SYSTEM STATUS: OPERATIONAL</strong><br />
+          Virtual Environment Active | Rich Console Output | JSON Data
+          Persistence |
+        </div>
+
+        <!-- VIDEO DEMONSTRATION -->
+        <h2>DEMONSTRATION VIDEO</h2>
+        <div class="video-container">
+          <video
+            controls
+            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Crect width='800' height='400' fill='%23000000'/%3E%3Ctext x='400' y='200' fill='%23666666' text-anchor='middle' font-family='monospace' font-size='16'%3EDemo Recording Placeholder%3C/text%3E%3C/svg%3E"
+          >
+            <source src="assets/demo.mp4" type="video/mp4" />
+            Your browser does not support the video tag. Please use a modern
+            browser.
+          </video>
+          <div class="video-caption">
+            📹 Terminal demonstration on VS Code . User adds team members,
+            creates projects, assigns tasks
+          </div>
+        </div>
+
+        <div class="note">
+          <strong> Reminder:</strong>I'm going to add my social media here later
+          <code>🗒</code> Remember to hydrate Toni!.
+        </div>
+
+        <!-- INSTALLATION SECTION -->
+        <h2>INSTALLATION INSTRUCTIONS</h2>
+
+        <div class="cmd-box">
+          ➤ Step 1: Clone the repository<br />
+          git clone https://github.com/ToniMoringa/SL_Management_CLI_Tool<br />
+          cd SL_Management_CLI_Tool<br />
+          <br />
+          ➤ Step 2: Create virtual environment<br />
+          python3 -m venv venv<br />
+          source venv/bin/activate<br />
+          <br />
+          ➤ Step 3: Install dependencies<br />
+          pip install rich<br />
+          <br />
+          ➤ Step 4: Run the tool<br />
+          python3 project_cli.py help
+        </div>
+
+        <!-- QUICK START -->
+        <h2>QUICK START</h2>
+        <div class="cmd-box">
+          $ python3 project_cli.py add-user "Manon" --email alice@example.com<br />
+          $ python3 project_cli.py add-project "Manon" "E-Commerce Website"<br />
+          $ python3 project_cli.py add-task "Manon" "E-Commerce Website" "Design
+          Database" --assignee Manon<br />
+          $ python3 project_cli.py done "Manon" "E-Commerce Website" "Design
+          Database"<br />
+          $ python3 project_cli.py dashboard
+        </div>
+
+        <!-- COMMAND REFERENCE -->
+        <h2>COMMAND REFERENCE</h2>
+
+        <h3>User Management</h3>
+        <table>
+          <tr>
+            <th>Command</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td>add-user NAME --email EMAIL</td>
+            <td>Create new user</td>
+            <td>add-user "Asha" --email Asha@work.com</td>
+          </tr>
+          <tr>
+            <td>set-email USER EMAIL</td>
+            <td>Update user email</td>
+            <td>set-email "Asha" new@email.com</td>
+          </tr>
+          <tr>
+            <td>list-users</td>
+            <td>Show all users</td>
+            <td>list-users</td>
+          </tr>
+        </table>
+
+        <h3>Project Management</h3>
+        <table>
+          <tr>
+            <th>Command</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td>add-project USER TITLE</td>
+            <td>Add project to user</td>
+            <td>add-project "Asha" "Website Redesign"</td>
+          </tr>
+          <tr>
+            <td>list-projects USER</td>
+            <td>Show user's projects</td>
+            <td>list-projects "Asha"</td>
+          </tr>
+        </table>
+
+        <h3>Task Management</h3>
+        <table>
+          <tr>
+            <th>Command</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td>add-task USER PROJECT TASK --assignee NAME</td>
+            <td>Add task to project</td>
+            <td>add-task "Asha" "Website" "Design" --assignee Asha</td>
+          </tr>
+          <tr>
+            <td>list-tasks USER PROJECT</td>
+            <td>Show tasks in project</td>
+            <td>list-tasks "Asha" "Website"</td>
+          </tr>
+          <tr>
+            <td>done USER PROJECT TASK</td>
+            <td>Mark task complete</td>
+            <td>done "Asha" "Website" "Design"</td>
+          </tr>
+          <tr>
+            <td>reassign USER PROJECT TASK NEW_ASSIGNEE</td>
+            <td>Reassign task</td>
+            <td>reassign "Asha" "Website" "Design" "Malik"</td>
+          </tr>
+        </table>
+
+        <h3>Views</h3>
+        <table>
+          <tr>
+            <th>Command</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td>dashboard</td>
+            <td>Show global progress</td>
+            <td>dashboard</td>
+          </tr>
+          <tr>
+            <td>dashboard USER</td>
+            <td>Show user progress</td>
+            <td>dashboard "Asha"</td>
+          </tr>
+          <tr>
+            <td>search KEYWORD</td>
+            <td>Search all data</td>
+            <td>search "database"</td>
+          </tr>
+          <tr>
+            <td>help</td>
+            <td>Display command reference</td>
+            <td>help</td>
+          </tr>
+        </table>
+
+        <!-- WORKFLOW EXAMPLE -->
+        <h2>COMPLETE WORKFLOW EXAMPLE</h2>
+
+        <div class="example">
+          <strong>𖤓 Complete Team Sprint Setup</strong>
+          <div class="code-block">
+            1. Create your team<br />
+            python3 project_cli.py add-user "Namjoon" --email
+            Namjoon@example.com<br />
+            python3 project_cli.py add-user "Asha" --email Asha@example.com<br />
+            python3 project_cli.py add-user "Malik"<br />
+            <br />
+            2. List your team<br />
+            python3 project_cli.py list-users<br />
+            <br />
+            3. Assign projects<br />
+            python3 project_cli.py add-project "Namjoon" "E-Commerce Website"<br />
+            python3 project_cli.py add-project "Asha" "API Gateway"<br />
+            python3 project_cli.py add-project "Malik" "Mobile App"<br />
+            <br />
+            4. Add tasks with assignees<br />
+            python3 project_cli.py add-task "Namjoon" "E-Commerce Website"
+            "Design Database" --assignee Alice<br />
+            python3 project_cli.py add-task "Asha" "API Gateway" "Implement Rate
+            Limiting" --assignee Bob<br />
+            python3 project_cli.py add-task "Malik" "Mobile App" "Create Login
+            Screen" --assignee Carol<br />
+            <br />
+            5. Reassign a task<br />
+            python3 project_cli.py reassign "Namjoon" "E-Commerce Website"
+            "Design Database" "Bob"<br />
+            <br />
+            6. Complete tasks<br />
+            python3 project_cli.py done "Asha" "API Gateway" "Implement Rate
+            Limiting"<br />
+            python3 project_cli.py done "Malik" "Mobile App" "Create Login
+            Screen"<br />
+            <br />
+            7. View progress<br />
+            python3 project_cli.py dashboard<br />
+            <br />
+            8. Search<br />
+            python3 project_cli.py search "API"
+          </div>
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <h2>📁 HOW THE CODE WORKS</h2>
+
+        <div class="cmd-box">
+          DATA FLOW:<br />
+          <br />
+          User Input ──► argparse ──► load_data() ──► projects.json<br />
+          │<br />
+          ▼<br />
+          Create/Modify Python Objects<br />
+          │<br />
+          ▼<br />
+          save_data() ──► projects.json<br />
+          │<br />
+          ▼<br />
+          rich.display() ──► Terminal Output (Tables + Progress Bars)
+        </div>
+
+        <!-- My idea Process -->
+        <h2>🖥 My process</h2>
+        <div class="cmd-box">
+          I initially struggled on how to make this CLI simple and not go
+          overboard within the time constrains ＞﹏＜ <br />
+          How it works.. You add users, give them projects, assign tasks in
+          there, mark them as done, and the dashboard shows the whole teams
+          progress and tha data is saved automatically<br />
+          ----------------------------------------------------------------------<br />
+          My first intro to Python was in Maya scripts and Blender and that got
+          me into coding. <br />
+          It's been fun and stressing at times but I love it<br />
+          <br />
+          <blink>(╥ᴗ╥)</blink> This project was really fun to do and challenging
+          at the same time.
+        </div>
+
+        <!-- FILE STRUCTURE -->
+        <h2>📁 MY PROJECT STRUCTURE</h2>
+        <div class="code-block">
+          SL_Management_CLI_Tool/<br />
+          ├── project_cli.py ➤Main application <br />
+          ├── test_cli.py ➤Unit tests <br />
+          ├── projects.json ➤ data storage<br />
+          ├── README.md ➤Documentation<br />
+          ├── guide.html ➤This guide<br />
+          ├── demo.mp4 ➤Screen recording <br />
+          └── venv/ ➤Virtual environment
+        </div>
+
+        <!-- TROUBLESHOOTING -->
+        <h2>⚙︎ TROUBLESHOOTING</h2>
+        <div class="note">
+          <strong>Problem:</strong> "python3: command not found"<br />
+          <strong>Solution:</strong> Install Python 3.8+ from python.org<br /><br />
+
+          <strong>Problem:</strong> "ModuleNotFoundError: No module named
+          'rich'"<br />
+          <strong>Solution:</strong> Activate venv: source venv/bin/activate
+          then pip install rich<br /><br />
+
+          <strong>Problem:</strong> Data not persisting<br />
+          <strong>Solution:</strong> Check write permissions: ls -la
+          projects.json<br /><br />
+
+          <strong>Problem:</strong> Video not playing<br />
+          <strong>Solution:</strong> Ensure demo.mp4 is in folder
+        </div>
+
+        <!-- GITHUB INFO -->
+        <h2>📎 GITHUB REPOSITORY</h2>
+        <div class="cmd-box">
+          Clone: git clone
+          <a
+            href="https://github.com/ToniMoringa/SL_Management_CLI_Tool"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="color: black; text-decoration: none"
+          >
+            https://github.com/ToniMoringa/SL_Management_CLI_Tool
+          </a>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+          <span>🗁 Data: projects.json</span>
+          <span>𓆗 Python 3.8+ Required</span>
+          <span>🏻 Rich Console</span>
+        </div>
+
+        <!-- Footer with GitHub -->
+        <div class="footer">
+          <strong>PROJECT MANAGER CLI TOOL</strong><br />
+          Built with Python | Powered by Rich | JSON Persistence<br />
+          <br />
+          <span class="badge">OOP Inheritance</span>
+          <span class="badge">Property Setters</span>
+          <span class="badge">JSON Persistence</span>
+          <span class="badge">argparse CLI</span>
+          <span class="badge">Rich Console</span>
+          <br /><br />
+          <blink>
+            <a
+              href="https://github.com/ToniMoringa"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="color: white; text-decoration: underline"
+            >
+              𓍯𓂃 https://github.com/ToniMoringa 𓍯𓂃
+            </a>
+          </blink>
+          <br /><br />
+          © ToniMuthwa | 2026
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

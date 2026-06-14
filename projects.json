@@ -1,0 +1,173 @@
+[
+  {
+    "id": 1,
+    "name": "Alice",
+    "email": null,
+    "projects": [
+      {
+        "title": "E-Commerce Website",
+        "description": "",
+        "tasks": [
+          {
+            "title": "Design database schema",
+            "assignee": "Bob",
+            "completed": true
+          },
+          {
+            "title": "Test Task",
+            "assignee": "Bob",
+            "completed": true
+          },
+          {
+            "title": "Test Sound",
+            "assignee": "Alice",
+            "completed": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Bob",
+    "email": null,
+    "projects": [
+      {
+        "title": "API Gateway",
+        "description": "",
+        "tasks": [
+          {
+            "title": "Implement rate limiting",
+            "assignee": null,
+            "completed": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Manon",
+    "email": "manon@dev.com",
+    "projects": [
+      {
+        "title": "Mobile Banking App",
+        "description": "",
+        "tasks": []
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Hasan",
+    "email": "Hasandev@email.com",
+    "projects": [
+      {
+        "title": "Project Management",
+        "description": "",
+        "tasks": []
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Jaehyun",
+    "email": "Jaehyun@dev@email.com",
+    "projects": [
+      {
+        "title": "My First App",
+        "description": "",
+        "tasks": []
+      },
+      {
+        "title": "Cafe Website Backend payment processor design",
+        "description": "",
+        "tasks": []
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Khalil",
+    "email": "khalilcoder@email.com",
+    "projects": [
+      {
+        "title": "Cafe Website UI redesign",
+        "description": "",
+        "tasks": []
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Namjoon",
+    "email": null,
+    "projects": [
+      {
+        "title": "Cafe Website UI redesign",
+        "description": "",
+        "tasks": []
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Asha",
+    "email": null,
+    "projects": [
+      {
+        "title": "Cafe Website Backend payment processor design",
+        "description": "",
+        "tasks": []
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Mugi",
+    "email": "mugimarurui@email.com",
+    "projects": [
+      {
+        "title": "Web app chatbot",
+        "description": "",
+        "tasks": []
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Karanja",
+    "email": "KaranjaKim@outlook.com",
+    "projects": [
+      {
+        "title": "Market Research",
+        "description": "",
+        "tasks": [
+          {
+            "title": "Community poll and outreach",
+            "assignee": "Eliud",
+            "completed": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Eliud",
+    "email": null,
+    "projects": [
+      {
+        "title": "Social Media Marketing",
+        "description": "",
+        "tasks": [
+          {
+            "title": "Make merch and post vids",
+            "assignee": "Manon",
+            "completed": true
+          }
+        ]
+      }
+    ]
+  }
+]
