@@ -5,11 +5,12 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))#
 Project Management CLI Tool
 Run: python3 cli/main.py
 """
-
+import pyfiglet
 import argparse
 import random
 from rich.console import Console
 from rich.panel import Panel
+
 
 from models.user import User
 from models.project import Project
@@ -215,6 +216,7 @@ def main():
             "📊PROGRESS! You're unstoppable!"
         ]
         console.print(f"[bold cyan]{random.choice(messages)}[/bold cyan]")
+        console.print(pyfiglet.figlet_format("DONE!", font="slant"))
         
         print('\a', end='', flush=True)  # System bell sound
         
