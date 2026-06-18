@@ -1,5 +1,11 @@
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import unittest
-from project_cli import User, Project, Task
+from models.user import User
+from models.project import Project
+from models.task import Task
 
 class TestProjectCLI(unittest.TestCase):
     
