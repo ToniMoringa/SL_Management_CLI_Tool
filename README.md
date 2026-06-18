@@ -51,7 +51,7 @@ Usage
 Run the tool:
 
 ```bash
-python3 project_cli.py
+python3 cli/main.py
 ```
 
 ## Data Storage
